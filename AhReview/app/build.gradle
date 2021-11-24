@@ -67,4 +67,7 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glide_version"
 
     implementation "com.google.code.gson:gson:$rootProject.gson_version"
+
+    // naver login
+    implementation 'com.naver.nid:naveridlogin-android-sdk:4.2.6'
 }
