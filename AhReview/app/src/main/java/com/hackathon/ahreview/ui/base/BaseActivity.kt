@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.hackathon.ahreview.BR
 import com.hackathon.ahreview.R
+import com.nhn.android.naverlogin.OAuthLogin
 import java.lang.reflect.ParameterizedType
 import java.util.*
 
@@ -15,6 +16,7 @@ abstract class BaseActivity<VB : ViewDataBinding, VM : BaseViewModel> : AppCompa
     protected lateinit var mViewModel: VM
 
     protected abstract val viewModel: VM
+    lateinit var mOAuthLoginInstance: OAuthLogin
 
     protected abstract fun observerViewModel()
 /*
@@ -50,6 +52,7 @@ abstract class BaseActivity<VB : ViewDataBinding, VM : BaseViewModel> : AppCompa
     override fun onDestroy() {
         super.onDestroy()
         if (::mBinding.isInitialized) mBinding.unbind()
+        if (::mOAuthLoginInstance.isInitialized) mOAuthLoginInstance.logout(this)
     }
 
     @LayoutRes
