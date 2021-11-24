@@ -48,7 +48,7 @@
             android:gravity="left"
             android:textColor="@color/black"
             android:textSize="@dimen/content"
-            tools:text="둘리마트" />
+            android:text="둘리마트" />
 
         <TextView
             android:id="@+id/storeTv_storeReview"
@@ -58,7 +58,7 @@
             android:fontFamily="@font/poppins_medium"
             android:textColor="@color/review_count"
             android:textSize="@dimen/cp_text"
-            tools:text="리뷰 40개" />
+            android:text="리뷰 40개" />
     </LinearLayout>
 
     <LinearLayout
