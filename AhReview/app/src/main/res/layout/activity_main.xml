@@ -44,7 +44,7 @@
                 android:fontFamily="@font/poppins_extrabold"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sub_title"
-                tools:text="조민수" />
+                android:text="조민수" />
 
             <TextView
                 android:id="@+id/user_hint"
@@ -135,7 +135,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-
                     android:fontFamily="@font/poppins_extrabold"
                     android:gravity="center"
                     android:text="가게 찾기"

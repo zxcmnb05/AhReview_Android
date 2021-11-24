@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import android.widget.Toast
 import com.hackathon.ahreview.R
 import com.hackathon.ahreview.databinding.ActivityLoginBinding
 import com.hackathon.ahreview.ui.base.BaseActivity
