@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk 24
 
     defaultConfig {
         applicationId "com.hackathon.ahreview"
@@ -69,5 +69,8 @@ dependencies {
     implementation "com.google.code.gson:gson:$rootProject.gson_version"
 
     // naver login
-    implementation 'com.naver.nid:naveridlogin-android-sdk:4.2.6'
+    implementation "com.naver.nid:naveridlogin-android-sdk:$rootProject.naver_login_version"
+
+    implementation "io.insert-koin:koin-android:$koin_version"
+    testImplementation "org.koin:koin-test:$koin_version"
 }
