@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">AhReview</string>
+    <string name="naver_client_name">AhReview</string>
+    <string name="naver_client_id">S0OAHuxMBd6gwiSnnys3</string>
+    <string name="naver_client_secret">P4tCUNXkil</string>
 </resources>

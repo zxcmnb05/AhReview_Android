@@ -9,17 +9,19 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.hackathon.ahreview.R
+import com.hackathon.ahreview.BR
 import java.lang.reflect.ParameterizedType
 import java.util.*
 
-bstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : Fragment() {
+abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : Fragment() {
     protected lateinit var mBinding: VB
     protected lateinit var mViewModel: VM
 
     protected abstract val viewModel: VM
 
     protected abstract fun observerViewModel()
-
+/*
     protected open fun onErrorEvent(e: Throwable) {
         e.printStackTrace()
         if (e is TokenException) {
@@ -27,7 +29,7 @@ bstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : Fragment(
             shortToast(e.message)
             return
         }
-    }
+    }*/
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,11 +44,13 @@ bstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : Fragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         performDataBinding()
+/*
 
         if (activity is MainActivity)
             (activity as MainActivity).findViewById<LinearLayout>(R.id.bar_main).visibility = View.VISIBLE
 
         mViewModel.onErrorEvent.observe(viewLifecycleOwner, { onErrorEvent(it) })
+*/
 
         observerViewModel()
     }
