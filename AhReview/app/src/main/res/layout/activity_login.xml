@@ -24,14 +24,33 @@
             app:layout_constraintTop_toTopOf="parent"
             android:gravity="center">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:text="AhReview에 온걸 환영해요"
-                android:textSize="24sp"
-                android:layout_marginBottom="20dp"/>
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AhReview"
+                    android:layout_marginEnd="8dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_extrabold"
+                    android:textSize="@dimen/content"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="14sp"
+                    android:text="에 오신 걸 환영합니다!" />
+            </LinearLayout>
 
             <com.nhn.android.naverlogin.ui.view.OAuthLoginButton
                 android:id="@+id/naver_login_btn"
