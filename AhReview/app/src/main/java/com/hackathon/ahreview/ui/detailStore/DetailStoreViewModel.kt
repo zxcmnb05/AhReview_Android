@@ -43,8 +43,7 @@ class DetailStoreViewModel(private val reviewRepository: ReviewRepository) : Bas
     }
 
     fun getReviewList(token: String, filter: Int, address: String) {
-        val request = GetReviewRequest(address)
-        addDisposable(reviewRepository.getReview(token, filter, request),
+        addDisposable(reviewRepository.getReview(token, filter, address),
             object : DisposableSingleObserver<List<StoreReview>>() {
 
                 override fun onSuccess(t: List<StoreReview>) {

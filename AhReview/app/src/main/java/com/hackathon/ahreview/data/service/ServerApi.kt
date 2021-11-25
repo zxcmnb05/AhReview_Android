@@ -32,6 +32,6 @@ interface ServerApi {
     fun getReview(
         @Header("authorization") token: String,
         @Query("filter") filter: Int,
-        @Body request: GetReviewRequest,
+        @Query("address") address: String,
     ): Single<Response<List<StoreReview>>>
 }

@@ -18,8 +18,8 @@ class ReviewRepository {
         }
     }
 
-    fun getReview(token: String, filter: Int, request: GetReviewRequest): Single<List<StoreReview>> {
-        return Server.serverRetrofit.getReview(token, filter, request).map {
+    fun getReview(token: String, filter: Int, address: String): Single<List<StoreReview>> {
+        return Server.serverRetrofit.getReview(token, filter, address).map {
             if (!it.isSuccessful) {
                 val errorBody = JSONObject(it.body().toString())
                 throw Throwable(errorBody.getString("message"))

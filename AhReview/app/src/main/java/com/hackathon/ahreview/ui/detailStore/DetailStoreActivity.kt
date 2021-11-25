@@ -1,8 +1,11 @@
 package com.hackathon.ahreview.ui.detailStore
 
 import android.content.Intent
+import android.content.res.Resources
+import androidx.appcompat.widget.ThemeUtils
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
+import com.hackathon.ahreview.R
 import com.hackathon.ahreview.data.model.response.Store
 import com.hackathon.ahreview.data.util.SharedPreferenceManager
 import com.hackathon.ahreview.databinding.ActivityDetailStoreBinding
@@ -15,6 +18,11 @@ class DetailStoreActivity : BaseActivity<ActivityDetailStoreBinding, DetailStore
     override val viewModel: DetailStoreViewModel by viewModel()
 
     lateinit var store: Store
+
+    override fun onResume() {
+        super.onResume()
+        getReviewList(1)
+    }
 
     override fun observerViewModel() {
 
@@ -50,17 +58,40 @@ class DetailStoreActivity : BaseActivity<ActivityDetailStoreBinding, DetailStore
 
             recentBtn.observe(this@DetailStoreActivity, Observer {
                 getReviewList(1)
+
+                btnInit()
+                mBinding.btnRecent.background = resources.getDrawable(R.drawable.activation_button_background)
+                mBinding.btnRecent.setTextColor(resources.getColor(R.color.white))
+
             })
 
             positiveBtn.observe(this@DetailStoreActivity, Observer {
                 getReviewList(2)
+                btnInit()
+                mBinding.btnPositive.background = resources.getDrawable(R.drawable.activation_button_background)
+                mBinding.btnPositive.setTextColor(resources.getColor(R.color.white))
             })
 
             negativeBtn.observe(this@DetailStoreActivity, Observer {
                 getReviewList(3)
+                btnInit()
+                mBinding.btnNegative.background = resources.getDrawable(R.drawable.activation_button_background)
+                mBinding.btnNegative.setTextColor(resources.getColor(R.color.white))
             })
         }
     }
+
+    fun btnInit(){
+        mBinding.btnRecent.background = resources.getDrawable(R.drawable.disabled_button_background)
+        mBinding.btnPositive.background = resources.getDrawable(R.drawable.disabled_button_background)
+        mBinding.btnNegative.background = resources.getDrawable(R.drawable.disabled_button_background)
+
+        mBinding.btnRecent.setTextColor(resources.getColor(R.color.black))
+        mBinding.btnPositive.setTextColor(resources.getColor(R.color.black))
+        mBinding.btnNegative.setTextColor(resources.getColor(R.color.black))
+
+    }
+
 
     private fun getStoreData() {
         val name = intent.getStringExtra("storeName")

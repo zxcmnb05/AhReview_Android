@@ -34,12 +34,14 @@ class WriteReviewActivity : BaseActivity<ActivityWriteReviewBinding, WriteReview
 
     lateinit var address: String
 
-    val negativeAnswer = listOf(
-        "좋은 리뷰 감사합니다~♥ 다음번에도 많은 이용 부탁드려요 ^3^",
+    val positiveAnswer = listOf(
+        "좋은 리뷰 감사합니다~ 다음번에도 많은 이용 부탁드려요 ^3^",
         "리뷰 덕분에 힘이 되었습니다~ 앞으로도 고객님이 만족하실 수 있도록 최선을 다하겠습니다",
+        "리뷰덕에 오늘 하루를 보람차게 보낼 수 있을 것 같습니다! 소중한 리뷰 감사합니다."
     )
-    val positiveAnswer = listOf("이용에 불편을 드려 죄송합니다\uD83D\uDE2A 다음번에는 훨씬 더 좋은 품질로 보답드리겠습니다.",
-        "아쉬우셨다고 하니, 저희도 마음이 아프네요 ㅠㅠ 다음엔 만족스러우실 수 있도록 최선을 다하겠습니다!", "")
+    val negativeAnswer = listOf("이용에 불편을 드려 죄송합니다 다음번에는 훨씬 더 좋은 품질로 보답드리겠습니다.",
+        "아쉬우셨다고 하니, 저희도 마음이 아프네요 ㅠㅠ 다음엔 만족스러우실 수 있도록 최선을 다하겠습니다!",
+        "부족한 부분이 있다면 언제든지 이야기해주세요. 고쳐나가도록 하겠습니다 감사합니다.")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -106,7 +108,8 @@ class WriteReviewActivity : BaseActivity<ActivityWriteReviewBinding, WriteReview
                                 }
 
                                 override fun onError(e: Throwable) {
-                                    shortToast("다시 시도해주세요")
+                                    e.printStackTrace()
+                                    finish()
                                 }
 
                             })
@@ -129,9 +132,9 @@ class WriteReviewActivity : BaseActivity<ActivityWriteReviewBinding, WriteReview
                                 }
 
                                 override fun onError(e: Throwable) {
-                                    shortToast("다시 시도해주세요")
+                                    finish()
+                                    e.printStackTrace()
                                 }
-
                             })
                     }
 
