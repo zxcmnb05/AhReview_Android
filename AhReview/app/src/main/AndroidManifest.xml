@@ -16,7 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AhReview">
         <activity
-            android:name=".ui.writeReview.WriteReviewActivity"
+            android:name=".ui.test.TestActivity"
+            android:exported="true" />
+      
+        <activity
+            android:name=".ui.write_review.WriteReviewActivity"
             android:exported="false" />
 
         <activity

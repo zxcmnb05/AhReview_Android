@@ -13,6 +13,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override fun observerViewModel() {
         with(viewModel) {
             findStoreBtn.observe(this@MainActivity, Observer {
+                //val intent = Intent(this@MainActivity, TestActivity::class.java)
                 val intent = Intent(this@MainActivity, FindStoreActivity::class.java)
                 startActivity(intent)
             })
