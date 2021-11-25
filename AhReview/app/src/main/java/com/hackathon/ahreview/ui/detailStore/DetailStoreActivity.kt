@@ -17,10 +17,10 @@ class DetailStoreActivity : BaseActivity<ActivityDetailStoreBinding, DetailStore
             onClickWriteReview.observe(this@DetailStoreActivity, {
                 val intent = Intent(this@DetailStoreActivity, WriteReviewActivity::class.java)
                 startActivity(intent)
-            }
+            })
             backBtn.observe(this@DetailStoreActivity, Observer {
                 finish()
-            }
+            })
         }
     }
 }

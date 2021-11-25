@@ -11,6 +11,7 @@ class DetailStoreViewModel:BaseViewModel() {
 
     fun onClickWriteReview(view: View) {
         onClickWriteReview.call()
+    }
         
     val backBtn = SingleLiveEvent<Any>()
 
