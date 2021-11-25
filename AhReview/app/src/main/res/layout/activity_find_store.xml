@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="com.hackathon.ahreview.ui.findStore.FindStoreViewModel" />
@@ -21,6 +22,7 @@
             android:layout_marginStart="6dp"
             android:layout_marginTop="10dp"
             android:background="@android:color/transparent"
+            android:onClick="@{() -> vm.onClickBackBtn()}"
             android:padding="20dp"
             android:src="@drawable/ic_back_btn"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,13 +60,13 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="20dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:orientation="vertical"
-            tools:listitem="@layout/store_item"
             android:layout_marginBottom="8dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            tools:listitem="@layout/store_item" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

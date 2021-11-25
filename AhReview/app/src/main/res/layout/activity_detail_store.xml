@@ -21,6 +21,7 @@
             android:layout_marginStart="6dp"
             android:layout_marginTop="10dp"
             android:background="@android:color/transparent"
+            android:onClick="@{() -> vm.onClickBackBtn()}"
             android:padding="20dp"
             android:src="@drawable/ic_back_btn"
             app:layout_constraintStart_toStartOf="parent"

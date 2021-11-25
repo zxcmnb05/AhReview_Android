@@ -1,6 +1,7 @@
 package com.hackathon.ahreview.ui.detailStore
 
 import android.content.Intent
+import androidx.lifecycle.Observer
 import com.hackathon.ahreview.databinding.ActivityDetailStoreBinding
 import com.hackathon.ahreview.ui.base.BaseActivity
 import com.hackathon.ahreview.ui.writeReview.WriteReviewActivity
@@ -16,7 +17,10 @@ class DetailStoreActivity : BaseActivity<ActivityDetailStoreBinding, DetailStore
             onClickWriteReview.observe(this@DetailStoreActivity, {
                 val intent = Intent(this@DetailStoreActivity, WriteReviewActivity::class.java)
                 startActivity(intent)
-            })
+            }
+            backBtn.observe(this@DetailStoreActivity, Observer {
+                finish()
+            }
         }
     }
 }
