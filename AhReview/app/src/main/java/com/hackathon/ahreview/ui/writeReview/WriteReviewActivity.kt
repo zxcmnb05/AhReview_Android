@@ -26,6 +26,9 @@ import androidx.core.app.ActivityCompat
 import android.os.Build
 import android.provider.MediaStore
 import androidx.activity.result.contract.ActivityResultContracts
+import com.hackathon.ahreview.data.model.request.ReviewRequest
+import com.hackathon.ahreview.data.util.SharedPreferenceManager
+import io.reactivex.observers.DisposableSingleObserver
 import java.io.File
 
 class WriteReviewActivity : BaseActivity<ActivityWriteReviewBinding, WriteReviewViewModel>() {
@@ -91,10 +94,34 @@ class WriteReviewActivity : BaseActivity<ActivityWriteReviewBinding, WriteReview
                 imageAdapter.notifyDataSetChanged()
             })
             onReviewed.observe(this@WriteReviewActivity, {
-                Log.e("별점", ratingStar.value.toString())
-                Log.e("익명", anonymous.value.toString())
-                Log.e("리뷰 내용", review.value.toString())
+                val token = SharedPreferenceManager.getToken(applicationContext)
 
+                if (token != null) {
+                    addDisposable(viewModel.reviewRepository.postReview(
+                        "Bearer $token",
+                        reviewRequest = ReviewRequest(
+                            address = "제주도",
+                            anonymous = anonymous.value!!,
+                            answer = "",
+                            positive = ,
+                            review = review.value.toString(),
+                            star_score = ratingStar.value!!.toInt(),
+                            url_list = imageAdapter.imageList.value ?: listOf()
+                        )
+                    ),
+                        object : DisposableSingleObserver<Any>() {
+                            override fun onSuccess(t: Any) {
+                                finish()
+                            }
+
+                            override fun onError(e: Throwable) {
+                                shortToast("다시 시도해주세요")
+                            }
+
+                        })
+                } else {
+                    shortToast("토큰이 존재하지 않습니다.")
+                }
             })
         }
     }
