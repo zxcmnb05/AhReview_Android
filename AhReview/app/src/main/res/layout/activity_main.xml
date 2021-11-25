@@ -42,9 +42,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/poppins_extrabold"
+                android:text="@{vm.userName}"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sub_title"
-                android:text="조민수" />
+                android:textSize="@dimen/sub_title" />
 
             <TextView
                 android:id="@+id/user_hint"
@@ -119,6 +119,7 @@
                 android:layout_marginBottom="24dp"
                 android:background="@drawable/store_search_background"
                 android:gravity="center"
+                android:onClick="@{() -> vm.onClickFindStoreBtn()}"
                 android:orientation="horizontal"
                 android:padding="10dp">
 

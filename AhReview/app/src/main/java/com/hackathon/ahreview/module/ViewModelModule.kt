@@ -1,5 +1,6 @@
 package com.hackathon.ahreview.module
 
+import com.hackathon.ahreview.ui.detailStore.DetailStoreViewModel
 import com.hackathon.ahreview.ui.findStore.FindStoreViewModel
 import com.hackathon.ahreview.ui.login.LoginViewModel
 import com.hackathon.ahreview.ui.main.MainViewModel
@@ -11,4 +12,5 @@ val ViewModelModule = module {
     viewModel { LoginViewModel() }
 
     viewModel { FindStoreViewModel() }
+    viewModel { DetailStoreViewModel() }
 }
