@@ -9,6 +9,6 @@ data class Store(
     @SerializedName("review_amount")
     val reviewAmount: Int,
     @SerializedName("star_score")
-    val starScore: Int,
-    val url: String
+    var starScore: Int = 0,
+    val url: String,
 )

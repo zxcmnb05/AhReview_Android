@@ -2,7 +2,9 @@ package com.hackathon.ahreview.data
 
 import com.hackathon.ahreview.data.service.ClovaApi
 import com.hackathon.ahreview.data.service.ServerApi
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
+import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory

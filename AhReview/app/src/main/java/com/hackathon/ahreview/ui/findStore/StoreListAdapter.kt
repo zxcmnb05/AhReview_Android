@@ -36,8 +36,8 @@ class StoreListAdapter : RecyclerView.Adapter<StoreListAdapter.ViewHolder>() {
 
     inner class ViewHolder(binding: StoreItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(store: Store, context: Context) {
-            binding.storeTvAverage.text = store.starScore.toString()
-            binding.storeTvStoreReview.text = store.reviewAmount.toString()
+            binding.storeTvAverage.text = "${store.starScore.toString()}.0"
+            binding.storeTvStoreReview.text = "리뷰 ${store.reviewAmount.toString()}개"
             binding.tvLocation.text = store.address
             binding.storeTvStoreName.text = store.name
 

@@ -22,6 +22,7 @@ class FindStoreViewModel(private val serverRepository: ServerRepository) : BaseV
 
                 override fun onError(e: Throwable) {
                     getStoreListError.value = e
+                    e.printStackTrace()
                 }
 
             })

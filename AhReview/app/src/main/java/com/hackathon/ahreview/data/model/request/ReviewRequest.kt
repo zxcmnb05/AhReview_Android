@@ -9,5 +9,5 @@ data class ReviewRequest(
     val positive: Boolean,
     val review: String,
     val star_score: Int,
-    val url_list: List<File>
+    val url_list: List<String>
 )

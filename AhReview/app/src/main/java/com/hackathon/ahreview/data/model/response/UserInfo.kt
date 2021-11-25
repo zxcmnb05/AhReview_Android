@@ -8,7 +8,5 @@ data class UserInfo(
     val name: String,
     val profile: String,
     @SerializedName("review_info_list")
-    val reviewInfoList: List<ReviewInfo>,
-    @SerializedName("store_list")
-    val storeList: List<String>
+    val reviewInfoList: List<ReviewInfo>
 )

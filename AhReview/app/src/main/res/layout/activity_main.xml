@@ -94,7 +94,7 @@
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            app:layout_constraintTop_toBottomOf="@+id/tv_reviewCount"
             tools:listitem="@layout/my_review_item">
 
         </androidx.recyclerview.widget.RecyclerView>

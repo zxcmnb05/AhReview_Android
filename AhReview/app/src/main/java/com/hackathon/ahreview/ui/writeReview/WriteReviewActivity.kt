@@ -1,35 +1,25 @@
 package com.hackathon.ahreview.ui.writeReview
 
 import android.Manifest
-import android.content.Intent
-import android.net.Uri
-import android.os.Bundle
-import android.os.Handler
-import android.os.Message
-import android.os.Environment
-import android.widget.RatingBar
-import com.hackathon.ahreview.databinding.ActivityWriteReviewBinding
-import com.hackathon.ahreview.ui.base.BaseActivity
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.lang.ref.WeakReference
-import com.hackathon.ahreview.R
+import android.os.*
 import android.util.Log
-
-import com.naver.speech.clientapi.SpeechRecognitionResult
-import com.hackathon.ahreview.utils.AudioWriterPCM
-
-import com.hackathon.ahreview.utils.NaverRecognizer
-import kr.hs.dgsw.smartschool.morammoram.presentation.extension.shortToast
-import java.lang.StringBuilder
+import android.widget.RatingBar
 import androidx.core.app.ActivityCompat
-
-import android.os.Build
-import android.provider.MediaStore
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
+import com.hackathon.ahreview.R
 import com.hackathon.ahreview.data.model.request.ReviewRequest
 import com.hackathon.ahreview.data.util.SharedPreferenceManager
+import com.hackathon.ahreview.databinding.ActivityWriteReviewBinding
+import com.hackathon.ahreview.ui.base.BaseActivity
+import com.hackathon.ahreview.utils.AudioWriterPCM
+import com.hackathon.ahreview.utils.NaverRecognizer
+import com.naver.speech.clientapi.SpeechRecognitionResult
 import io.reactivex.observers.DisposableSingleObserver
-import java.io.File
+import kr.hs.dgsw.smartschool.morammoram.presentation.extension.shortToast
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.lang.ref.WeakReference
+import java.util.*
 
 class WriteReviewActivity : BaseActivity<ActivityWriteReviewBinding, WriteReviewViewModel>() {
     override val viewModel: WriteReviewViewModel by viewModel()
@@ -41,6 +31,15 @@ class WriteReviewActivity : BaseActivity<ActivityWriteReviewBinding, WriteReview
     lateinit var naverRecognizer: NaverRecognizer
 
     lateinit var writer: AudioWriterPCM
+
+    lateinit var address: String
+
+    val negativeAnswer = listOf(
+        "좋은 리뷰 감사합니다~♥ 다음번에도 많은 이용 부탁드려요 ^3^",
+        "리뷰 덕분에 힘이 되었습니다~ 앞으로도 고객님이 만족하실 수 있도록 최선을 다하겠습니다",
+    )
+    val positiveAnswer = listOf("이용에 불편을 드려 죄송합니다\uD83D\uDE2A 다음번에는 훨씬 더 좋은 품질로 보답드리겠습니다.",
+        "아쉬우셨다고 하니, 저희도 마음이 아프네요 ㅠㅠ 다음엔 만족스러우실 수 있도록 최선을 다하겠습니다!", "")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +53,16 @@ class WriteReviewActivity : BaseActivity<ActivityWriteReviewBinding, WriteReview
                 ), PERMISSION
             )
         }
+
+        address = intent.getStringExtra("address")
+        mBinding.storeItem.storeTvStoreName.text = intent.getStringExtra("name")
+        mBinding.storeItem.tvLocation.text = intent.getStringExtra("address")
+        mBinding.storeItem.storeTvStoreReview.text = "리뷰 ${intent.getIntExtra("count", 0)}개"
+        mBinding.storeItem.storeTvAverage.text = "${intent.getIntExtra("score", 0)}.0"
+
+        Glide.with(this)
+            .load(intent.getStringExtra("url"))
+            .into(mBinding.storeItem.storeImage)
 
         writer = AudioWriterPCM(
             Environment.getExternalStorageDirectory().absolutePath
@@ -70,7 +79,67 @@ class WriteReviewActivity : BaseActivity<ActivityWriteReviewBinding, WriteReview
                 viewModel.ratingStar.value = rating
             }
         with(viewModel) {
-            mBinding.rvWritePostImage.adapter = imageAdapter
+
+            sentimentSuccess.observe(this@WriteReviewActivity, Observer {
+                val token = SharedPreferenceManager.getToken(applicationContext)
+
+                if (token != null) {
+                    val url = ArrayList<String>()
+                    url.add(imageUrl.value!!)
+
+                    if (it.equals("negative")) {
+                        addDisposable(viewModel.reviewRepository.postReview(
+                            "Bearer $token",
+                            reviewRequest = ReviewRequest(
+                                address = address,
+                                anonymous = anonymous.value!!,
+                                answer = getMessage(false),
+                                positive = false,
+                                review = review.value.toString(),
+                                star_score = ratingStar.value!!.toInt(),
+                                url_list = url
+                            )
+                        ),
+                            object : DisposableSingleObserver<Any>() {
+                                override fun onSuccess(t: Any) {
+                                    finish()
+                                }
+
+                                override fun onError(e: Throwable) {
+                                    shortToast("다시 시도해주세요")
+                                }
+
+                            })
+                    } else {
+                        addDisposable(viewModel.reviewRepository.postReview(
+                            "Bearer $token",
+                            reviewRequest = ReviewRequest(
+                                address = address,
+                                anonymous = anonymous.value!!,
+                                answer = getMessage(true),
+                                positive = true,
+                                review = review.value.toString(),
+                                star_score = ratingStar.value!!.toInt(),
+                                url_list = url
+                            )
+                        ),
+                            object : DisposableSingleObserver<Any>() {
+                                override fun onSuccess(t: Any) {
+                                    finish()
+                                }
+
+                                override fun onError(e: Throwable) {
+                                    shortToast("다시 시도해주세요")
+                                }
+
+                            })
+                    }
+
+
+                } else {
+                    shortToast("토큰이 존재하지 않습니다.")
+                }
+            })
 
             onClickedAnonymous.observe(this@WriteReviewActivity, {
                 anonymous.value = anonymous.value != true
@@ -84,77 +153,23 @@ class WriteReviewActivity : BaseActivity<ActivityWriteReviewBinding, WriteReview
                 }
 
             })
-            onOpenImagePickerEvent.observe(this@WriteReviewActivity, {
-                val intent =
-                    Intent().setType("image/*").putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-                        .setAction(Intent.ACTION_PICK)
-                getContent.launch(intent)
-            })
-            imageAdapter.imageList.observe(this@WriteReviewActivity, {
-                imageAdapter.notifyDataSetChanged()
-            })
             onReviewed.observe(this@WriteReviewActivity, {
-                val token = SharedPreferenceManager.getToken(applicationContext)
-
-                if (token != null) {
-                    addDisposable(viewModel.reviewRepository.postReview(
-                        "Bearer $token",
-                        reviewRequest = ReviewRequest(
-                            address = "제주도",
-                            anonymous = anonymous.value!!,
-                            answer = "",
-                            positive = ,
-                            review = review.value.toString(),
-                            star_score = ratingStar.value!!.toInt(),
-                            url_list = imageAdapter.imageList.value ?: listOf()
-                        )
-                    ),
-                        object : DisposableSingleObserver<Any>() {
-                            override fun onSuccess(t: Any) {
-                                finish()
-                            }
-
-                            override fun onError(e: Throwable) {
-                                shortToast("다시 시도해주세요")
-                            }
-
-                        })
-                } else {
-                    shortToast("토큰이 존재하지 않습니다.")
-                }
+                getSentiment(resources.getString(R.string.clova_client_id),
+                    resources.getString(R.string.clova_client_secret),
+                    resources.getString(R.string.json_type),
+                    review.value!!)
             })
         }
     }
 
-    val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        if (it.resultCode == RESULT_OK) {
-            it.data?.clipData?.apply {
-                for (i in 0 until itemCount) {
-                    mViewModel.imageAdapter.imageList.value?.add(
-                        File(getRealPathFromURI(getItemAt(i).uri).path)
-                    )
-                    Log.e("image", mViewModel.imageAdapter.imageList.value.toString())
-                }
-            }
-                ?: mViewModel.imageAdapter.imageList.value?.add(
-                    File(getRealPathFromURI(it.data?.data ?: Uri.EMPTY).path)
-                )
+    fun getMessage(check: Boolean): String {
+        val i = Math.random().toInt() * 3
 
-            mViewModel.imageAdapter.notifyListChanged()
+        return if (check) {
+            positiveAnswer[i]
+        } else {
+            negativeAnswer[i]
         }
-    }
-
-    // uri의 절대 경로를 반환하는 메서드
-    private fun getRealPathFromURI(uri: Uri): Uri {
-        val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor = this.contentResolver.query(uri, filePathColumn, null, null, null)
-        cursor?.moveToFirst()
-
-        val columnIndex = cursor?.getColumnIndex(filePathColumn[0])
-        val picturePath = columnIndex?.let { cursor.getString(it) }
-        cursor?.close()
-
-        return Uri.fromFile(File(picturePath ?: ""))
     }
 
     class RecognitionHandler(activity: WriteReviewActivity?) : Handler() {

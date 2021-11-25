@@ -201,6 +201,7 @@
                 android:fontFamily="@font/poppins_semibold"
                 android:text="최신순"
                 android:textColor="@color/white"
+                android:onClick="@{() -> vm.onClickRecentBtn()}"
                 android:textSize="@dimen/cp_text" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -211,6 +212,7 @@
                 android:layout_marginEnd="12dp"
                 android:background="@drawable/disabled_button_background"
                 android:elevation="16dp"
+                android:onClick="@{() -> vm.onClickPositiveBtn()}"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="긍정"
                 android:textColor="@color/black"
@@ -222,6 +224,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/disabled_button_background"
                 android:elevation="16dp"
+                android:onClick="@{() -> vm.onClickNegativeBtn()}"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="부정"
                 android:textColor="@color/black"
@@ -246,6 +249,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/store_review_recycler"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"

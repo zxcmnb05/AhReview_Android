@@ -13,7 +13,7 @@ val ViewModelModule = module {
     viewModel { MainViewModel(get()) }
     viewModel { LoginViewModel(get()) }
     viewModel { FindStoreViewModel(get()) }
-    viewModel { DetailStoreViewModel() }
+    viewModel { DetailStoreViewModel(get()) }
     viewModel { TestViewModel(get()) }
-    viewModel { WriteReviewViewModel(get()) }
+    viewModel { WriteReviewViewModel(get(), get()) }
 }

@@ -103,25 +103,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView2"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:elevation="10dp"
-                app:cardCornerRadius="5dp"
-                app:layout_constraintStart_toEndOf="@+id/linearLayout6"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:id="@+id/storeImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:srcCompat="@tools:sample/avatars" />
-
-            </androidx.cardview.widget.CardView>
-
             <TextView
                 android:id="@+id/reviewD_content"
                 android:layout_width="wrap_content"
@@ -137,29 +118,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
-            <TextView
-                android:id="@+id/reviewD_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="2021.11.23"
-                android:textColor="@color/date_color"
-                android:textSize="@dimen/cp_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <ImageButton
                 android:id="@+id/imageBtn_speaker2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
                 android:layout_marginEnd="4dp"
                 android:background="@android:color/transparent"
                 android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/reviewD_date"
+                app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_speaker" />
 
 
@@ -242,18 +210,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/reply_cardView" />
 
-                <TextView
-                    android:id="@+id/reply_date"
+                <ImageButton
+                    android:id="@+id/imageBtn_speaker3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
                     android:layout_marginEnd="4dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="2021.11.23"
-                    android:textColor="@color/date_color"
-                    android:textSize="@dimen/cp_text"
+                    android:background="@android:color/transparent"
+                    android:padding="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_speaker" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

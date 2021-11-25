@@ -1,5 +1,6 @@
 package com.hackathon.ahreview.ui.main
 
+import android.util.Log
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.hackathon.ahreview.data.util.SharedPreferenceManager
@@ -29,10 +30,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                     .load(it.profile)
                     .into(mBinding.userImage)
 
+                Log.e("sadf", it.reviewInfoList.size.toString())
+
                 val mainAdapter = MainAdapter()
                 mainAdapter.context = this@MainActivity
                 mainAdapter.items = it.reviewInfoList
 
+                mainAdapter.notifyDataSetChanged()
                 mBinding.myReviewRecycler.adapter = mainAdapter
             })
 

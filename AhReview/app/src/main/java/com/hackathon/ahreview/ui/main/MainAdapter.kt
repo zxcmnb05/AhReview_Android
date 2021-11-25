@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.hackathon.ahreview.R
 import com.hackathon.ahreview.data.model.response.ReviewInfo
 import com.hackathon.ahreview.databinding.MyReviewItemBinding
@@ -41,6 +42,11 @@ class MainAdapter: RecyclerView.Adapter<MainAdapter.ViewHolder>() {
             //binding.tvStoreName.text = item.
             setStar(item.starScore)
             binding.tvContent.text = item.review
+            binding.tvStoreName.text = item.name
+
+            Glide.with(context)
+                .load(item.url)
+                .into(binding.imageView)
 
             binding.imageBtnSpeaker1.setOnClickListener {
                 NaverAPITTS().getTTS(item.review)
