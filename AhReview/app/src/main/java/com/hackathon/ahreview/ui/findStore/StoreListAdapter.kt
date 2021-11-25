@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.hackathon.ahreview.R
 import com.hackathon.ahreview.data.model.response.Store
 import com.hackathon.ahreview.databinding.StoreItemBinding
@@ -36,6 +37,11 @@ class StoreListAdapter : RecyclerView.Adapter<StoreListAdapter.ViewHolder>() {
             binding.storeTvAverage.text = store.starScore.toString()
             binding.storeTvStoreReview.text = store.reviewAmount.toString()
             binding.tvLocation.text = store.address
+            binding.storeTvStoreName.text = store.name
+
+            Glide.with(context)
+                .load(store.url)
+                .into(binding.storeImage)
         }
     }
 
