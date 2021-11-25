@@ -1,5 +1,6 @@
 package com.hackathon.ahreview.ui.writeReview
 
+import android.Manifest
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
@@ -18,12 +19,15 @@ import com.hackathon.ahreview.utils.AudioWriterPCM
 import com.hackathon.ahreview.utils.NaverRecognizer
 import kr.hs.dgsw.smartschool.morammoram.presentation.extension.shortToast
 import java.lang.StringBuilder
+import androidx.core.app.ActivityCompat
 
+import android.os.Build
 
 class WriteReviewActivity : BaseActivity<ActivityWriteReviewBinding, WriteReviewViewModel>() {
     override val viewModel: WriteReviewViewModel by viewModel()
 
-    private val CLIENT_ID = resources.getString(R.string.clova_client_id)
+    private val CLIENT_ID = "2g52oohbbm"
+    private val PERMISSION = 1
 
     lateinit var handler: RecognitionHandler
     lateinit var naverRecognizer: NaverRecognizer
@@ -33,6 +37,20 @@ class WriteReviewActivity : BaseActivity<ActivityWriteReviewBinding, WriteReview
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        if (Build.VERSION.SDK_INT >= 23) {
+            // 퍼미션 체크
+            ActivityCompat.requestPermissions(
+                this, arrayOf(
+                    Manifest.permission.INTERNET,
+                    Manifest.permission.RECORD_AUDIO
+                ), PERMISSION
+            )
+        }
+
+        writer = AudioWriterPCM(
+            Environment.getExternalStorageDirectory().absolutePath
+                .toString() + "/NaverSpeechTest"
+        )
         handler = RecognitionHandler(this)
         naverRecognizer = NaverRecognizer(this, handler, CLIENT_ID)
     }
@@ -50,10 +68,10 @@ class WriteReviewActivity : BaseActivity<ActivityWriteReviewBinding, WriteReview
 
             onMicClicked.observe(this@WriteReviewActivity, {
                 onMic.value != onMic.value
-                if (onMic.value == false){
+                if (!naverRecognizer.getSpeechRecognizer()!!.isRunning){
                     naverRecognizer.recognize()
                 } else {
-                    naverRecognizer.stop();
+                    naverRecognizer.getSpeechRecognizer()!!.stop()
                 }
 
             })
@@ -77,17 +95,12 @@ class WriteReviewActivity : BaseActivity<ActivityWriteReviewBinding, WriteReview
         when (msg.what) {
             R.id.clientReady -> {
                 // Now an user can speak.
-                shortToast("Connected")
-                writer = AudioWriterPCM(
-                    Environment.getExternalStorageDirectory().absolutePath
-                        .toString() + "/NaverSpeechTest"
-                )
+                shortToast("연결되었습니다 말해주세요")
                 writer.open("Test")
             }
             R.id.audioRecording -> writer.write(msg.obj as ShortArray)
             R.id.partialResult -> {
                 // Extract obj property typed with String.
-                Log.d("Result : ", msg.obj as String)
             }
             R.id.finalResult -> {
                 // Extract obj property typed with String array.
@@ -96,9 +109,10 @@ class WriteReviewActivity : BaseActivity<ActivityWriteReviewBinding, WriteReview
                 val results = speechRecognitionResult.results
                 val strBuf = StringBuilder()
                 for (result in results) {
-                    strBuf.append(result)
-                    strBuf.append("\n")
+                    strBuf.append(result + " ")
+                    break
                 }
+                viewModel.review.value += strBuf.toString()
                 Log.d("Result : ", strBuf.toString())
             }
             R.id.recognitionError -> {
@@ -117,7 +131,11 @@ class WriteReviewActivity : BaseActivity<ActivityWriteReviewBinding, WriteReview
 
     override fun onStart() {
         super.onStart()
+        naverRecognizer.getSpeechRecognizer()!!.initialize()
+    }
 
-        naverRecognizer.mRecognizer
+    override fun onStop() {
+        super.onStop()
+        naverRecognizer.getSpeechRecognizer()!!.release()
     }
 }
