@@ -36,7 +36,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
     object : OAuthLoginHandler() {
         override fun run(success: Boolean) {
             if (success) {
-                Log.e("accesstoken : ", mOAuthLoginInstance.getAccessToken(mContext))
+                Log.e("accessToken : ", mOAuthLoginInstance.getAccessToken(mContext))
                 Log.e("refreshToken  : ", mOAuthLoginInstance.getRefreshToken(mContext))
                 Log.e("expiresAt  : ", mOAuthLoginInstance.getExpiresAt(mContext).toString())
                 Log.e("tokenType  : ", mOAuthLoginInstance.getTokenType(mContext))

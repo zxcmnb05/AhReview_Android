@@ -74,4 +74,6 @@ dependencies {
 
     implementation "io.insert-koin:koin-android:$koin_version"
     testImplementation "org.koin:koin-test:$koin_version"
+
+    implementation "com.naver.speech.clientapi:naverspeech-ncp-sdk-android:$rootProject.naver_speech_recongnition"
 }
