@@ -1,7 +1,6 @@
-package com.hackathon.ahreview.ui.write_review
+package com.hackathon.ahreview.ui.writeReview
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import android.widget.RadioButton
 import android.widget.RatingBar
 import com.hackathon.ahreview.databinding.ActivityWriteReviewBinding
 import com.hackathon.ahreview.ui.base.BaseActivity
@@ -15,5 +14,11 @@ class WriteReviewActivity : BaseActivity<ActivityWriteReviewBinding, WriteReview
             RatingBar.OnRatingBarChangeListener { _, rating, _ ->
                 viewModel.rating.value = rating
             }
+
+        with(viewModel) {
+            onClickedAnonymous.observe(this@WriteReviewActivity, {
+                anonymous.value = anonymous.value != true
+            })
+        }
     }
 }

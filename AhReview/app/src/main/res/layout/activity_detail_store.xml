@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="vm"
             type="com.hackathon.ahreview.ui.detailStore.DetailStoreViewModel" />
@@ -240,6 +239,7 @@
             android:text="리뷰쓰기"
             android:textColor="@color/white"
             android:textSize="@dimen/content"
+            android:onClick="@{vm::onClickWriteReview}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
