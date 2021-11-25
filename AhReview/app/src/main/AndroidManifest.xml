@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AhReview">
         <activity
+            android:name=".ui.write_review.WriteReviewActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.findStore.FindStoreActivity"
             android:exported="true" />
         <activity
