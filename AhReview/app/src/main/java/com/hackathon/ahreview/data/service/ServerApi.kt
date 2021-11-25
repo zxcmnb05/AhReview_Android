@@ -1,5 +1,6 @@
 package com.hackathon.ahreview.data.service
 
+import com.hackathon.ahreview.data.model.request.ReviewRequest
 import com.hackathon.ahreview.data.model.request.TokenLoginRequest
 import com.hackathon.ahreview.data.model.response.Login
 import com.hackathon.ahreview.data.model.response.Store
@@ -20,4 +21,11 @@ interface ServerApi {
 
     @POST("login/token")
     fun tokenLogin(@Body request: TokenLoginRequest): Single<Response<Login>>
+
+
+    @POST("/review")
+    fun postReview(
+        @Header("authorization") token: String,
+        @Body reviewRequest: ReviewRequest
+    ): Single<Response<Any>>
 }

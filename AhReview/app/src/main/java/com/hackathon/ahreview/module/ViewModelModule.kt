@@ -15,5 +15,5 @@ val ViewModelModule = module {
     viewModel { FindStoreViewModel(get()) }
     viewModel { DetailStoreViewModel() }
     viewModel { TestViewModel(get()) }
-    viewModel { WriteReviewViewModel() }
+    viewModel { WriteReviewViewModel(get()) }
 }

@@ -4,10 +4,11 @@ import android.speech.RecognitionListener
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
+import com.hackathon.ahreview.data.repository.ReviewRepository
 import com.hackathon.ahreview.ui.base.BaseViewModel
 import com.hackathon.ahreview.utils.SingleLiveEvent
 
-class WriteReviewViewModel : BaseViewModel() {
+class WriteReviewViewModel(val reviewRepository: ReviewRepository) : BaseViewModel() {
 
     val onClickedAnonymous = SingleLiveEvent<Unit>()
     val onMicClicked = SingleLiveEvent<Unit>()
@@ -15,8 +16,9 @@ class WriteReviewViewModel : BaseViewModel() {
     val onOpenImagePickerEvent = SingleLiveEvent<Unit>()
 
     val anonymous = MutableLiveData<Boolean>(false)
+    val positive = MutableLiveData<String>("")
     val review = MutableLiveData<String>("")
-    val ratingStar = MutableLiveData<Float>()
+    val ratingStar = MutableLiveData<Float>(0)
 
     val imageAdapter = WriteReviewImageAdapter()
 
