@@ -69,10 +69,10 @@
                             android:id="@+id/ratingBar"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:progressTint="#F6D10E"
-                            android:progressBackgroundTint="#F4F4F4"
-                            android:secondaryProgressTint="#F4F4F4"
                             android:layout_marginLeft="20dp"
+                            android:progressBackgroundTint="#F4F4F4"
+                            android:progressTint="#F6D10E"
+                            android:secondaryProgressTint="#F4F4F4"
                             android:stepSize="1" />
                     </LinearLayout>
 
@@ -109,7 +109,7 @@
                             android:layout_height="30dp"
                             android:buttonTint="#52734D"
                             android:checked="@{vm.anonymous}"
-                            android:onClick="@{vm::onCheckedAnonymous}"/>
+                            android:onClick="@{vm::onCheckedAnonymous}" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -129,10 +129,10 @@
                         android:layout_margin="10dp"
                         android:background="@android:color/transparent"
                         android:gravity="top"
-                        android:text="@={vm.review}"
                         android:hint="가게에 대한 솔직한 리뷰를 남겨주세요."
                         android:inputType="textMultiLine"
                         android:scrollHorizontally="false"
+                        android:text="@={vm.review}"
                         android:textSize="@dimen/content" />
 
                     <ImageView
@@ -150,24 +150,35 @@
                     android:layout_height="20dp" />
 
                 <LinearLayout
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="@drawable/image_background_corner"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:backgroundTint="#878787"
-                        android:src="@drawable/ic_image" />
+                    <LinearLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/image_background_corner"
+                        android:gravity="center"
+                        android:onClick="@{vm::openImagePicker}"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:backgroundTint="#878787"
+                            android:src="@drawable/ic_image" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_write_post_image"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="사진 1/4"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/cp_text" />
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="3"
+                        tools:listitem="@layout/item_image_write_review" />
 
                 </LinearLayout>
 
@@ -185,6 +196,7 @@
             android:layout_marginBottom="24dp"
             android:background="@drawable/store_search_background"
             android:gravity="center"
+            android:onClick="@{vm::onReviewChecked}"
             android:orientation="horizontal"
             android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="parent"

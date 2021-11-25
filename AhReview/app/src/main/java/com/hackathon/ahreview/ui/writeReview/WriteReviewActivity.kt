@@ -1,6 +1,8 @@
 package com.hackathon.ahreview.ui.writeReview
 
 import android.Manifest
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
@@ -22,6 +24,9 @@ import java.lang.StringBuilder
 import androidx.core.app.ActivityCompat
 
 import android.os.Build
+import android.provider.MediaStore
+import androidx.activity.result.contract.ActivityResultContracts
+import java.io.File
 
 class WriteReviewActivity : BaseActivity<ActivityWriteReviewBinding, WriteReviewViewModel>() {
     override val viewModel: WriteReviewViewModel by viewModel()
@@ -59,23 +64,70 @@ class WriteReviewActivity : BaseActivity<ActivityWriteReviewBinding, WriteReview
 
         mBinding.ratingBar.onRatingBarChangeListener =
             RatingBar.OnRatingBarChangeListener { _, rating, _ ->
-                viewModel.rating.value = rating
+                viewModel.ratingStar.value = rating
             }
         with(viewModel) {
+            mBinding.rvWritePostImage.adapter = imageAdapter
+
             onClickedAnonymous.observe(this@WriteReviewActivity, {
                 anonymous.value = anonymous.value != true
             })
 
             onMicClicked.observe(this@WriteReviewActivity, {
-                onMic.value != onMic.value
-                if (!naverRecognizer.getSpeechRecognizer()!!.isRunning){
+                if (!naverRecognizer.getSpeechRecognizer()!!.isRunning) {
                     naverRecognizer.recognize()
                 } else {
                     naverRecognizer.getSpeechRecognizer()!!.stop()
                 }
 
             })
+            onOpenImagePickerEvent.observe(this@WriteReviewActivity, {
+                val intent =
+                    Intent().setType("image/*").putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+                        .setAction(Intent.ACTION_PICK)
+                getContent.launch(intent)
+            })
+            imageAdapter.imageList.observe(this@WriteReviewActivity, {
+                imageAdapter.notifyDataSetChanged()
+            })
+            onReviewed.observe(this@WriteReviewActivity, {
+                Log.e("별점", ratingStar.value.toString())
+                Log.e("익명", anonymous.value.toString())
+                Log.e("리뷰 내용", review.value.toString())
+
+            })
         }
+    }
+
+    val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (it.resultCode == RESULT_OK) {
+            it.data?.clipData?.apply {
+                for (i in 0 until itemCount) {
+                    mViewModel.imageAdapter.imageList.value?.add(
+                        File(getRealPathFromURI(getItemAt(i).uri).path)
+                    )
+                    Log.e("image", mViewModel.imageAdapter.imageList.value.toString())
+                }
+            }
+                ?: mViewModel.imageAdapter.imageList.value?.add(
+                    File(getRealPathFromURI(it.data?.data ?: Uri.EMPTY).path)
+                )
+
+            mViewModel.imageAdapter.notifyListChanged()
+        }
+    }
+
+    // uri의 절대 경로를 반환하는 메서드
+    private fun getRealPathFromURI(uri: Uri): Uri {
+        val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = this.contentResolver.query(uri, filePathColumn, null, null, null)
+        cursor?.moveToFirst()
+
+        val columnIndex = cursor?.getColumnIndex(filePathColumn[0])
+        val picturePath = columnIndex?.let { cursor.getString(it) }
+        cursor?.close()
+
+        return Uri.fromFile(File(picturePath ?: ""))
     }
 
     class RecognitionHandler(activity: WriteReviewActivity?) : Handler() {

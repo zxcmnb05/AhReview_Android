@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/USER/Documents/GitHub/AhReview_Android/AhReview/app/src/main/res/drawable/ic_back_btn.xml" value="0.29010416666666666" />
+        <entry key="..\:/Users/USER/Documents/GitHub/AhReview_Android/AhReview/app/src/main/res/drawable/ic_cancel.xml" value="0.29010416666666666" />
         <entry key="..\:/Users/USER/Documents/GitHub/AhReview_Android/AhReview/app/src/main/res/drawable/ic_image.xml" value="0.29010416666666666" />
         <entry key="..\:/Users/USER/Documents/GitHub/AhReview_Android/AhReview/app/src/main/res/drawable/ic_left_arrow.xml" value="0.29010416666666666" />
         <entry key="..\:/Users/USER/Documents/GitHub/AhReview_Android/AhReview/app/src/main/res/drawable/ic_mic.xml" value="0.29010416666666666" />
@@ -20,6 +21,7 @@
         <entry key="..\:/Users/USER/Documents/GitHub/AhReview_Android/AhReview/app/src/main/res/layout/activity_write_review_java.xml" value="0.2477355072463768" />
         <entry key="..\:/Users/USER/Documents/GitHub/AhReview_Android/AhReview/app/src/main/res/layout/coptright_layout.xml" value="0.1" />
         <entry key="..\:/Users/USER/Documents/GitHub/AhReview_Android/AhReview/app/src/main/res/layout/detail_review_item.xml" value="0.2477355072463768" />
+        <entry key="..\:/Users/USER/Documents/GitHub/AhReview_Android/AhReview/app/src/main/res/layout/item_image_write_review.xml" value="0.1" />
         <entry key="..\:/Users/USER/Documents/GitHub/AhReview_Android/AhReview/app/src/main/res/layout/my_review_item.xml" value="0.2477355072463768" />
         <entry key="..\:/Users/USER/Documents/GitHub/AhReview_Android/AhReview/app/src/main/res/layout/store_item.xml" value="0.264" />
       </map>

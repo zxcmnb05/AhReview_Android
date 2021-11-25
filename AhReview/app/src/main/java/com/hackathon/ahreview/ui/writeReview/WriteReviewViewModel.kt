@@ -11,11 +11,14 @@ class WriteReviewViewModel : BaseViewModel() {
 
     val onClickedAnonymous = SingleLiveEvent<Unit>()
     val onMicClicked = SingleLiveEvent<Unit>()
-    val onMic = MutableLiveData<Boolean>(false)
+    val onReviewed = SingleLiveEvent<Unit>()
+    val onOpenImagePickerEvent = SingleLiveEvent<Unit>()
 
     val anonymous = MutableLiveData<Boolean>(false)
     val review = MutableLiveData<String>("")
-    val rating = MutableLiveData<Float>()
+    val ratingStar = MutableLiveData<Float>()
+
+    val imageAdapter = WriteReviewImageAdapter()
 
     fun onCheckedAnonymous(view: View) {
         onClickedAnonymous.call()
@@ -23,5 +26,13 @@ class WriteReviewViewModel : BaseViewModel() {
 
     fun onMicClicked(view: View) {
         onMicClicked.call()
+    }
+
+    fun onReviewChecked(view: View) {
+        onReviewed.call()
+    }
+
+    fun openImagePicker(view: View) {
+        onOpenImagePickerEvent.call()
     }
 }

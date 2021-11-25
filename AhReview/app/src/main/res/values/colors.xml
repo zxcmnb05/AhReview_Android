@@ -8,6 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="colorBackgroundPostImage">@color/white</color>
+
     <color name="line">#AEAEAE</color>
     <color name="review_count">#737373</color>
     <color name="search_background">#52734D</color>
