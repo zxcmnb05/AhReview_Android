@@ -1,6 +1,7 @@
 package com.hackathon.ahreview.ui.findStore
 
 import androidx.lifecycle.Observer
+import com.hackathon.ahreview.data.util.SharedPreferenceManager
 import com.hackathon.ahreview.databinding.ActivityFindStoreBinding
 import com.hackathon.ahreview.ui.base.BaseActivity
 import kr.hs.dgsw.smartschool.morammoram.presentation.extension.shortToast
@@ -10,7 +11,7 @@ class FindStoreActivity : BaseActivity<ActivityFindStoreBinding, FindStoreViewMo
     override val viewModel: FindStoreViewModel by viewModel()
 
     override fun observerViewModel() {
-        viewModel.getStoreList()
+        getStoreList()
 
         with(viewModel) {
             backBtn.observe(this@FindStoreActivity, Observer {
@@ -28,6 +29,16 @@ class FindStoreActivity : BaseActivity<ActivityFindStoreBinding, FindStoreViewMo
             getStoreListError.observe(this@FindStoreActivity, Observer {
                 shortToast("가게 정보를 가져오지 못했습니다.")
             })
+        }
+    }
+
+    private fun getStoreList() {
+        val token = SharedPreferenceManager.getToken(applicationContext)
+
+        if (token != null) {
+            viewModel.getStoreList("Bearer $token")
+        } else {
+            shortToast("토큰이 존재하지 않습니다.")
         }
     }
 

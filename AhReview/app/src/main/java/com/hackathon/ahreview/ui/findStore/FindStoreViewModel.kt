@@ -13,8 +13,8 @@ class FindStoreViewModel(private val serverRepository: ServerRepository) : BaseV
     val getStoreListSuccess = MutableLiveData<List<Store>>()
     val getStoreListError = MutableLiveData<Throwable>()
 
-    fun getStoreList() {
-        addDisposable(serverRepository.getStoreList(),
+    fun getStoreList(token: String) {
+        addDisposable(serverRepository.getStoreList(token),
             object : DisposableSingleObserver<List<Store>>() {
                 override fun onSuccess(t: List<Store>) {
                     getStoreListSuccess.value = t

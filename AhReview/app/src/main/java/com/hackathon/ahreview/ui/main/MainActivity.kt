@@ -23,8 +23,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
             getUserInfoSuccess.observe(this@MainActivity, Observer {
                 mBinding.userName.text = it.name
+                mBinding.tvReviewCount.text = "작성한 리뷰 수 : ${it.reviewInfoList.size.toString()}"
+
                 Glide.with(this@MainActivity)
-                    .load(mBinding.userImage)
+                    .load(it.profile)
                     .into(mBinding.userImage)
 
                 val mainAdapter = MainAdapter()

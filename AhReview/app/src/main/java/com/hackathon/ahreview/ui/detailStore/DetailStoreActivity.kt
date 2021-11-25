@@ -11,8 +11,6 @@ class DetailStoreActivity : BaseActivity<ActivityDetailStoreBinding, DetailStore
     override val viewModel: DetailStoreViewModel by viewModel()
 
     override fun observerViewModel() {
-
-
         with(viewModel) {
             onClickWriteReview.observe(this@DetailStoreActivity, Observer {
                 val intent = Intent(this@DetailStoreActivity, WriteReviewActivity::class.java)
