@@ -5,4 +5,5 @@
 
     <string name="clova_client_id">2g52oohbbm</string>
     <string name="clova_client_secret">9Fbp185GtaebnVMb3YgMJUHru0efAOXpKvLMYC7y</string>
+    <string name="json_type">application/json</string>
 </resources>
