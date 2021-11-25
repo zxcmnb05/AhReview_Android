@@ -10,6 +10,11 @@ import com.hackathon.ahreview.R
 import com.naver.speech.clientapi.*
 import com.naver.speech.clientapi.SpeechConfig.EndPointDetectType
 
+import com.naver.speech.clientapi.SpeechConfig;
+import com.naver.speech.clientapi.SpeechRecognitionException;
+import com.naver.speech.clientapi.SpeechRecognitionListener;
+import com.naver.speech.clientapi.SpeechRecognitionResult;
+import com.naver.speech.clientapi.SpeechRecognizer;
 import com.naver.speech.clientapi.SpeechConfig.LanguageType
 
 class NaverRecognizer(context: Context?, handler: Handler, clientId: String?) : SpeechRecognitionListener {
@@ -40,6 +45,10 @@ class NaverRecognizer(context: Context?, handler: Handler, clientId: String?) : 
         } catch (e: SpeechRecognitionException) {
             e.printStackTrace()
         }
+    }
+
+    fun getSpeechRecognizer(): SpeechRecognizer? {
+        return mRecognizer
     }
 
     @WorkerThread
