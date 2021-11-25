@@ -1,6 +1,8 @@
 package com.hackathon.ahreview.data.repository
 
 import com.hackathon.ahreview.data.Server
+import com.hackathon.ahreview.data.model.request.TokenLoginRequest
+import com.hackathon.ahreview.data.model.response.Login
 import com.hackathon.ahreview.data.model.response.Store
 import com.hackathon.ahreview.data.model.response.UserInfo
 import io.reactivex.Single
@@ -17,8 +19,8 @@ class ServerRepository {
         }
     }
 
-    fun getStoreList(): Single<List<Store>> {
-        return Server.serverRetrofit.getStoreList().map {
+    fun getStoreList(token: String): Single<List<Store>> {
+        return Server.serverRetrofit.getStoreList(token).map {
             if (!it.isSuccessful) {
                 val errorBody = JSONObject(it.body().toString())
                 throw Throwable(errorBody.getString("message"))
@@ -26,5 +28,17 @@ class ServerRepository {
             it.body()
         }
     }
+
+    fun tokenLogin(token: String): Single<Login> {
+        val request = TokenLoginRequest(token)
+        return Server.serverRetrofit.tokenLogin(request).map {
+            if (!it.isSuccessful) {
+                val errorBody = JSONObject(it.body().toString())
+                throw Throwable(errorBody.getString("message"))
+            }
+            it.body()
+        }
+    }
+
 
 }

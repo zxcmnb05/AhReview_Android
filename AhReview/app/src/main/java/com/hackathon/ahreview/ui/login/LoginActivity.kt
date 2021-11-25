@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import androidx.lifecycle.Observer
 import com.hackathon.ahreview.R
 import com.hackathon.ahreview.data.util.SharedPreferenceManager
 import com.hackathon.ahreview.databinding.ActivityLoginBinding
@@ -31,6 +32,20 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         )
 
         mBinding.naverLoginBtn.setOAuthLoginHandler(mOAuthLoginHandler)
+
+        with(viewModel){
+            loginSuccess.observe(this@LoginActivity, Observer {
+                SharedPreferenceManager.setToken(this@LoginActivity, it.accessToken)
+
+                val intent = Intent(mContext, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            })
+
+            loginError.observe(this@LoginActivity, Observer {
+                shortToast("토큰을 전달받지 못했습니다. 다시 시도해주세요")
+            })
+        }
     }
 
     private val mOAuthLoginHandler: OAuthLoginHandler = @SuppressLint("HandlerLeak")
@@ -39,13 +54,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
             if (success) {
                 SharedPreferenceManager.setToken(this@LoginActivity, mOAuthLoginInstance.getAccessToken(mContext))
                 Log.e("accessToken : ", mOAuthLoginInstance.getAccessToken(mContext))
-                Log.e("accessToken : ", mOAuthLoginInstance.hashCode().toString())
                 Log.e("refreshToken  : ", mOAuthLoginInstance.getRefreshToken(mContext))
                 Log.e("expiresAt  : ", mOAuthLoginInstance.getExpiresAt(mContext).toString())
                 Log.e("tokenType  : ", mOAuthLoginInstance.getTokenType(mContext))
-                val intent = Intent(mContext, MainActivity::class.java)
-                startActivity(intent)
-                finish()
+
+                viewModel.login(mOAuthLoginInstance.getAccessToken(mContext))
             } else {
                 val errorCode: String = mOAuthLoginInstance.getLastErrorCode(mContext).code
                 val errorDesc = mOAuthLoginInstance.getLastErrorDesc(mContext)
