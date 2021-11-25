@@ -55,6 +55,7 @@
             app:layout_constraintTop_toBottomOf="@+id/back_btn" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/store_recycler"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="20dp"

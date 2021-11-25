@@ -1,5 +1,6 @@
 package com.hackathon.ahreview.data.service
 
+import com.hackathon.ahreview.data.model.response.Store
 import com.hackathon.ahreview.data.model.response.UserInfo
 import io.reactivex.Single
 import retrofit2.Response
@@ -11,6 +12,6 @@ interface ServerApi {
     fun getUserInfo(@Header("authorization") token: String): Single<Response<UserInfo>>
 
     @GET("store")
-    fun getStoreList()
+    fun getStoreList(): Single<Response<List<Store>>>
 
 }
