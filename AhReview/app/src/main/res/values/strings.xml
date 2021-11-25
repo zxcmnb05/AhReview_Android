@@ -2,4 +2,7 @@
     <string name="naver_client_name">AhReview</string>
     <string name="naver_client_id">S0OAHuxMBd6gwiSnnys3</string>
     <string name="naver_client_secret">P4tCUNXkil</string>
+
+    <string name="clova_client_id">2g52oohbbm</string>
+    <string name="clova_client_secret">9Fbp185GtaebnVMb3YgMJUHru0efAOXpKvLMYC7y</string>
 </resources>
