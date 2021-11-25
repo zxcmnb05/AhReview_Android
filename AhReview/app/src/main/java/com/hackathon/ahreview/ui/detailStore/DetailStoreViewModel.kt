@@ -1,13 +1,14 @@
 package com.hackathon.ahreview.ui.detailStore
 
 import android.view.View
-import androidx.lifecycle.MutableLiveData
 import com.hackathon.ahreview.ui.base.BaseViewModel
 import com.hackathon.ahreview.utils.SingleLiveEvent
 
-class DetailStoreViewModel:BaseViewModel() {
+class DetailStoreViewModel : BaseViewModel() {
 
     val onClickWriteReview = SingleLiveEvent<Unit>()
+
+    val backBtn = SingleLiveEvent<Any>()
 
     fun onClickWriteReview(view: View) {
         onClickWriteReview.call()
@@ -15,7 +16,7 @@ class DetailStoreViewModel:BaseViewModel() {
         
     val backBtn = SingleLiveEvent<Any>()
 
-    fun onClickBackBtn(){
+    fun onClickBackBtn() {
         backBtn.call()
     }
 }

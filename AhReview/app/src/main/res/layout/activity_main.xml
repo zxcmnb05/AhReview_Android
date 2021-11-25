@@ -82,6 +82,7 @@
             app:layout_constraintTop_toBottomOf="@+id/line" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/myReview_recycler"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"

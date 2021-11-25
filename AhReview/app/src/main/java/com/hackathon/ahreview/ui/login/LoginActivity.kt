@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import com.hackathon.ahreview.R
+import com.hackathon.ahreview.data.util.SharedPreferenceManager
 import com.hackathon.ahreview.databinding.ActivityLoginBinding
 import com.hackathon.ahreview.ui.base.BaseActivity
 import com.hackathon.ahreview.ui.main.MainActivity
@@ -36,7 +37,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
     object : OAuthLoginHandler() {
         override fun run(success: Boolean) {
             if (success) {
-                Log.e("accesstoken : ", mOAuthLoginInstance.getAccessToken(mContext))
+                SharedPreferenceManager.setToken(this@LoginActivity, mOAuthLoginInstance.getAccessToken(mContext))
+                Log.e("accessToken : ", mOAuthLoginInstance.getAccessToken(mContext))
+                Log.e("accessToken : ", mOAuthLoginInstance.hashCode().toString())
                 Log.e("refreshToken  : ", mOAuthLoginInstance.getRefreshToken(mContext))
                 Log.e("expiresAt  : ", mOAuthLoginInstance.getExpiresAt(mContext).toString())
                 Log.e("tokenType  : ", mOAuthLoginInstance.getTokenType(mContext))

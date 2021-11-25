@@ -1,121 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/review_background"
-    android:elevation="4dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="68dp"
-        android:layout_height="68dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:elevation="10dp"
-        app:cardCornerRadius="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <data>
 
-        <ImageView
-            android:id="@+id/storeImage"
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/review_background"
+        android:elevation="4dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:elevation="10dp"
+            app:cardCornerRadius="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/storeImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:srcCompat="@tools:sample/avatars" />
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toEndOf="@+id/cardView"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/storeTv_storeName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/poppins_extrabold"
+                android:gravity="left"
+                android:textColor="@color/black"
+                android:textSize="@dimen/content"
+                android:text="둘리마트" />
+
+            <TextView
+                android:id="@+id/storeTv_storeReview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/review_count"
+                android:textSize="@dimen/cp_text"
+                android:text="리뷰 40개" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout2"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </androidx.cardview.widget.CardView>
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_on_star" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical"
-        app:layout_constraintStart_toEndOf="@+id/cardView"
-        app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/storeTv_average"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="4dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="4.0"
+                android:textColor="@color/black"
+                android:textSize="@dimen/cp_text" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/storeTv_storeName"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="4dp"
-            android:fontFamily="@font/poppins_extrabold"
-            android:gravity="left"
-            android:textColor="@color/black"
-            android:textSize="@dimen/content"
-            android:text="둘리마트" />
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-        <TextView
-            android:id="@+id/storeTv_storeReview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:fontFamily="@font/poppins_medium"
-            android:textColor="@color/review_count"
-            android:textSize="@dimen/cp_text"
-            android:text="리뷰 40개" />
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="4dp"
+                app:srcCompat="@drawable/location" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout2"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/ic_on_star" />
-
-        <TextView
-            android:id="@+id/storeTv_average"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="4dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/poppins_semibold"
-            android:text="4.0"
-            android:textColor="@color/black"
-            android:textSize="@dimen/cp_text" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="4dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_gravity="center"
-            android:layout_marginEnd="4dp"
-            app:srcCompat="@drawable/location" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:fontFamily="@font/poppins_medium"
-            android:text="전라남도 해남군 해남읍 구교리 590"
-            android:textColor="@color/location_color"
-            android:textSize="8dp" />
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_medium"
+                android:text="전라남도 해남군 해남읍 구교리 590"
+                android:textColor="@color/location_color"
+                android:textSize="8dp" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

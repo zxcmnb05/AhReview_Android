@@ -1,6 +1,7 @@
 package com.hackathon.ahreview
 
 import android.app.Application
+import com.hackathon.ahreview.module.RepositoryModule
 import com.hackathon.ahreview.module.ViewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -12,7 +13,7 @@ class Application : Application() {
 
         startKoin{
             androidContext(this@Application)
-            val modules = listOf(ViewModelModule)
+            val modules = listOf(ViewModelModule, RepositoryModule)
 
             modules(modules)
         }
