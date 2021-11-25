@@ -7,13 +7,13 @@
 
         <variable
             name="vm"
-            type="com.hackathon.ahreview.ui.write_review.WriteReviewViewModel" />
+            type="com.hackathon.ahreview.ui.writeReview.WriteReviewViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.write_review.WriteReviewActivity">
+        tools:context=".ui.writeReview.WriteReviewActivity">
 
         <LinearLayout
             android:id="@+id/linearLayout5"
@@ -69,6 +69,9 @@
                             android:id="@+id/ratingBar"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:progressTint="#F6D10E"
+                            android:progressBackgroundTint="#F4F4F4"
+                            android:secondaryProgressTint="#F4F4F4"
                             android:layout_marginLeft="20dp"
                             android:stepSize="1" />
                     </LinearLayout>
@@ -105,7 +108,8 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:buttonTint="#52734D"
-                            android:checked="true" />
+                            android:checked="@{vm.anonymous}"
+                            android:onClick="@{vm::onCheckedAnonymous}"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -123,7 +127,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        android:background="#aaaaaa"
+                        android:background="@android:color/transparent"
                         android:gravity="top"
                         android:hint="가게에 대한 솔직한 리뷰를 남겨주세요."
                         android:inputType="textMultiLine"
@@ -134,7 +138,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right|bottom"
-                        android:layout_margin="20dp"
+                        android:padding="20dp"
                         android:src="@drawable/ic_mic" />
 
                 </androidx.cardview.widget.CardView>
@@ -144,15 +148,15 @@
                     android:layout_height="20dp" />
 
                 <LinearLayout
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:background="@drawable/image_background_corner"
                     android:gravity="center"
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
                         android:backgroundTint="#878787"
                         android:src="@drawable/ic_image" />
 
@@ -161,7 +165,7 @@
                         android:layout_height="wrap_content"
                         android:text="사진 1/4"
                         android:textColor="@color/black"
-                        android:textSize="7dp" />
+                        android:textSize="@dimen/cp_text" />
 
                 </LinearLayout>
 
