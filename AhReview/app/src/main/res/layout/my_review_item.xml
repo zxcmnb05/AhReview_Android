@@ -10,14 +10,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="4dp"
         android:layout_margin="8dp"
-<<<<<<< Updated upstream
-        android:background="@drawable/review_background">
-=======
         android:background="@drawable/review_background"
         android:elevation="2dp">
->>>>>>> Stashed changes
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"

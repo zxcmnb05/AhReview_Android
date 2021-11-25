@@ -26,6 +26,7 @@
             android:background="@drawable/review_background"
             android:elevation="8dp">
 
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
                 android:layout_width="25dp"
@@ -38,7 +39,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/storeImage"
+                    android:id="@+id/user_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:srcCompat="@tools:sample/avatars" />
@@ -46,6 +47,7 @@
             </androidx.cardview.widget.CardView>
 
             <LinearLayout
+                android:id="@+id/linearLayout6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -101,6 +103,25 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:elevation="10dp"
+                app:cardCornerRadius="5dp"
+                app:layout_constraintStart_toEndOf="@+id/linearLayout6"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/storeImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+            </androidx.cardview.widget.CardView>
+
             <TextView
                 android:id="@+id/reviewD_content"
                 android:layout_width="wrap_content"
@@ -133,8 +154,10 @@
                 android:id="@+id/imageBtn_speaker2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="15dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="4dp"
                 android:background="@android:color/transparent"
+                android:padding="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/reviewD_date"
                 app:srcCompat="@drawable/ic_speaker" />
