@@ -129,6 +129,7 @@
                         android:layout_margin="10dp"
                         android:background="@android:color/transparent"
                         android:gravity="top"
+                        android:text="@={vm.review}"
                         android:hint="가게에 대한 솔직한 리뷰를 남겨주세요."
                         android:inputType="textMultiLine"
                         android:scrollHorizontally="false"
